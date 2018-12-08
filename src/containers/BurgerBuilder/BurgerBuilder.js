@@ -24,7 +24,7 @@ class BurgerBuilder extends Component {
     loading: false,
     error: false
   };
-  componentDidMount() {
+  componentWillMount() {
     axios
       .get("/ingredients.json")
       .then(response => {
@@ -87,44 +87,16 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: false });
   };
   purchaseContinueHandler = () => {
-    // this.setState({ loading: true });
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice, // this should be calculated on server side in a production setup,
-    //   customer: {
-    //     name: "Iván Hdez.",
-    //     address: {
-    //       street: "Testing, 1",
-    //       zipCode: "46001",
-    //       country: "ES"
-    //     },
-    //     email: "test@test.com",
-    //     deilveryMethod: "fastest"
-    //   }
-    // };
-
-    // axios
-    //   .post("/orders.json", order)
-    //   .then(response => {
-    //     this.setState({
-    //       loading: false,
-    //       purchasing: false
-    //     });
-    //   })
-    //   .catch(error => {
-    //     this.setState({
-    //       loading: false
-    //     });
-    //   });
-    let queryParams = []
-    for (let i in this.state.ingredients){
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    let queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(`${encodeURIComponent(i)}=${encodeURIComponent(this.state.ingredients[i])}`);
     }
-    queryParams = queryParams.join('&')
+    queryParams.push("price=" + this.state.totalPrice);
+    queryParams = queryParams.join("&");
     this.props.history.push({
-      pathname: '/checkout',
+      pathname: "/checkout",
       search: queryParams
-    })
+    });
   };
   render() {
     const disabledInfo = {
