@@ -9,14 +9,17 @@
   margin: 10px;
   font-weight: bold;
 }
-
+.Button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 .Button:first-of-type {
   margin-left: 0;
   padding-left: 0;
 }
 
 .Success {
-  color: #5C9210;
+  color: #5c9210;
 }
 
 .Danger {

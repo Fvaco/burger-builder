@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Order.css";
-const Order = props => {
+const order = props => {
   let ingredients = [];
   for(let ingredientName  in props.ingredients){
     ingredients.push({
@@ -27,4 +27,4 @@ const Order = props => {
   );
 };
 
-export default Order;
+export default order;
